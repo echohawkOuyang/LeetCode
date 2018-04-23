@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +35,7 @@ public class Test1 {
                 overZeroIndex.put(i, num[i]);
             }
         }
+        //这里之前是使用的Integer   当Integer超过127之后i！=j 就会判断错误
         for (int i :
              smallThanIndex.keySet()) {
             for (int j :
