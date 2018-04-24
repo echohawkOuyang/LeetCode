@@ -1,7 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Test2 {
+/**
+ * 依旧超时
+ */
+public class Test1_2 {
     public static int[] towSum(int[] num, int target) {
         int[] array = new int[2];
         Map<Integer,Integer> smalllowZeroIndex = new HashMap<>();

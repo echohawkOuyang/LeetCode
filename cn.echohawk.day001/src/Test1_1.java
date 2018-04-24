@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * 这个超时   19/20
  */
-public class Test1 {
+public class Test1_1 {
     public static int[] towSum(int[] num, int target) {
         int[] array = new int[2];
         Map<Integer,Integer> smallThanIndex = new HashMap<>();
