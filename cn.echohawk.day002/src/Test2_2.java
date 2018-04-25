@@ -28,4 +28,8 @@ public class Test2_2 {
              total = total.divide(ten),list = list.next = new ListNode(Integer.parseInt(""+(total.mod(ten)))));
         return node;
     }
+
+    public static void main(String[] args) {
+
+    }
 }

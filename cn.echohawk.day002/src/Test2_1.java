@@ -7,8 +7,6 @@
  *原因：342 + 465 = 807
  */
 
-import java.math.BigInteger;
-
 /**
  * 好晚了，大数解决不了，明天来；
  */
@@ -21,26 +19,24 @@ class ListNode {
 public class Test2_1 {
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         StringBuilder sb = new StringBuilder();
-
+        long num1,num2,total;
         for (ListNode listNode = l1; listNode != null; listNode=listNode.next)
             sb.insert(0,listNode.val);
-        BigInteger num1 = new BigInteger(sb.toString());
+        num1 = Long.parseLong(sb.toString());
         sb.delete(0, sb.length());
         for (ListNode listNode = l2; listNode != null; listNode=listNode.next)
             sb.insert(0,listNode.val);
-        BigInteger num2 = new BigInteger(sb.toString());
-        BigInteger total = num1.add(num2);
+        num2 = Long.parseLong(sb.toString());
+        total = num1 + num2;
         ListNode node;
         ListNode list;
-        BigInteger ten = new BigInteger("10");
-        for (list = new ListNode(Integer.parseInt(""+(total.mod(ten)))), node = list;
-             !total.divide(ten).equals(new BigInteger("0"));
-             total = total.divide(ten),list = list.next = new ListNode(Integer.parseInt(""+(total.mod(ten)))));
+        for (list = new ListNode(Integer.parseInt(""+(total % 10))), node = list; total != 0; total /= 10,list = list.next = new ListNode(Integer.parseInt(""+(total % 10)))) {
+        }
         return node;
     }
 
     public static void main(String[] args) {
-        /*ListNode node1 = new ListNode(9);
+        ListNode node1 = new ListNode(9);
 
         ListNode node4 = new ListNode(1);
         ListNode node5 = new ListNode(9);
@@ -60,19 +56,8 @@ public class Test2_1 {
         node9.next = node10;
         node10.next = node11;
         node11.next = node12;
-        node12.next = node13;*/
-        ListNode node1 = new ListNode(2);
-
-        ListNode node2 = new ListNode(4);
-        ListNode node3 = new ListNode(3);
-        ListNode node6 = new ListNode(5);
-        ListNode node7 = new ListNode(6);
-        ListNode node8 = new ListNode(4);
-        node1.next = node2;
-        node2.next = node3;
-        node6.next = node7;
-        node7.next = node8;
-        ListNode node14 = addTwoNumbers(node1,node6);
+        node12.next = node13;
+        ListNode node14 = addTwoNumbers(node1,node4);
         for (; node14.next != null; node14 = node14.next)
             System.out.print(node14.val);
     }
