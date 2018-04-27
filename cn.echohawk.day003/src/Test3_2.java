@@ -1,3 +1,9 @@
+/**
+ * 改成字符了，不过还有功能没有实现
+ * 和之前预想的有误差
+ */
+
+
 public class Test3_2 {
     public static int lengthOfLongestSubstring(String s) {
         //先把相同字母相连替换成一个
