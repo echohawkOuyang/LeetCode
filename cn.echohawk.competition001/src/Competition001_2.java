@@ -18,47 +18,68 @@
  Return the correct "mask" of the information provided.
  这是一个关于正则的联系
  */
-import java.util.regex;
+import java.util.regex.*;
+import java.util.*;
 
 public class Competition001_2 {
     public static String maskPII(String S) {
-	//先判断是否为email
-	String emailRegex = "[a-zA-Z]{2,}@[a-zA-Z]{2,}\\.[a-zA-Z]{2,}";
-	Pattern pattern = Pattern.compile(emailRegex);
-	Matcher matcher = pattern.matcher(S);
-        if (matcher.matches()) {
-	    String s = S.toLowerCase();
-	    char first = s.CharAt(0);
-	    char end = s.CharAt(s.IndexOf("@") - 1);
-	    return first + "*****" + end + s.substring(s.IndexOf("@"));
-	} else {
-	    List<char> list = new ArrayList<>();
-	    int count = 0;
-	    for (int i = S.length - 1; i >= 0; i++) {
-	        if ('0' <= S.CharAt(i) <= '9') {
-		    if(list.size() < 5)
-		    	list.add(S.CharAt(i));
-		    count ++;
+		//先判断是否为email
+		String emailRegex = "[a-zA-Z]{2,}@[a-zA-Z]{2,}\\.[a-zA-Z]{2,}";
+		Pattern pattern = Pattern.compile(emailRegex);
+		Matcher matcher = pattern.matcher(S);
+		if (matcher.matches()) {
+			String s = S.toLowerCase();
+			char first = s.charAt(0);
+			char end = s.charAt(s.indexOf("@") - 1);
+			return first + "*****" + end + s.substring(s.indexOf("@"));
+		} else {
+			List<Character> list = new ArrayList<>();
+			int count = 0;
+			for (int i = S.length() - 1; i >= 0; i--) {
+				if ('0' <= S.charAt(i) && S.charAt(i) <= '9') {
+					if (list.size() < 4)
+						list.add(S.charAt(i));
+					count ++;
+				}
+			}
+			if (14 > count && count > 10) {
+
+				StringBuilder sb = new StringBuilder("+");
+				for (int j = 0;j < count - 10;j ++) {
+					sb.append("*");
+				}
+				sb.append("-***-***-");
+				for (int k = list.size() - 1;k >= 0; k--) {
+					sb.append(list.get(k));
+				}
+				return sb.toString();
+			} else if (count <= 10){
+				StringBuilder sb = new StringBuilder();
+				for (int j = 0;j < count - 7;j++) {
+					sb.append("*");
+					if (j == count - 8) {
+						sb.append("-");
+						count = 7;
+						break;
+					}
+				}
+				for (int y = 0;y < count - 4;y++) {
+					sb.append("*");
+					if (y == count - 5) {
+						sb.append("-");
+					}
+				}
+				for (int k = list.size() - 1;k >= 0; k--) {
+					sb.append(list.get(k));
+				}
+				return sb.toString();
+			} else {
+				return "";
+			}
 		}
-	    }
-	    if (14 > count > 10) {
-		StringBuilder sb = new StringBuilder("+***-***-***-");
-		for (char c : list) {
-		    sb.appand(c);
-		}
-		return sb.toString();
-	    } else {
-	        StringBuilder sb = new StringBuilder("***-***-");
-		for (char c : list) {
-		    sb.appand(c);
-	       	}
-		return sb.toString();
-	    }
-	}
-	return "";
     }
 
     public static void main(String[] args) {
-	System.out.println(maskPII("LeetCode@LeetCode.com"));
+		System.out.println(maskPII("86-(10)12345678"));
     }
 }
