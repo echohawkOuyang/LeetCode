@@ -22,12 +22,20 @@ import java.util.Map;
  * 用一个最笨的雏形
  *
  * 还有边界之没考虑
+ *
+ *21%
+ *
+ *
+ * 还有直接通过公式计算下一个，就能直接取了
  */
 public class Test6_1 {
     public static String convert(String s, int numRows) {
         Map<Integer, List<Character>> map = new HashMap<>();
         boolean flag = true;
         int key = 1;
+        if (numRows == 1) {
+            return s;
+        }
         for (int i = 1; i <= numRows; i++) {
             map.put(i, new ArrayList<>());
         }
